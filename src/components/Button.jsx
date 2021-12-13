@@ -1,25 +1,32 @@
 import PropTypes from "prop-types";
-import Button from "./Button";
 
-function Header({ title, onAdd, showAdd }) {
+function Button({ children, onClick, color, type, block }) {
+  const btnClasses = "btn " + (block ? "btn-block" : "");
+
   return (
-    <header className="header">
-      <h1>{title}</h1>
-      <Button onClick={onAdd} color={showAdd ? "red" : "green"}>
-        {showAdd ? "Cancel" : "Add"}
-      </Button>
-    </header>
+    <button
+      type={type}
+      style={{ backgroundColor: color }}
+      onClick={onClick}
+      className={btnClasses}
+    >
+      {children}
+    </button>
   );
 }
 
-Header.defaultProps = {
-  title: "Task Tracker",
+Button.defaultProps = {
+  color: "steelblue",
+  type: "button",
+  block: false,
 };
 
-Header.propTypes = {
-  title: PropTypes.string,
-  onAdd: PropTypes.func.isRequired,
-  showAdd: PropTypes.bool.isRequired,
+Button.propTypes = {
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  color: PropTypes.string,
+  type: PropTypes.string,
+  block: PropTypes.bool,
 };
 
-export default Header;
+export default Button;
